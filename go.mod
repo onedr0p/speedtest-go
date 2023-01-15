@@ -12,7 +12,7 @@ require (
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.1
-	github.com/lib/pq v1.10.4
+	github.com/lib/pq v1.10.7
 	github.com/oklog/ulid/v2 v2.0.2
 	github.com/pires/go-proxyproto v0.6.1
 	github.com/sirupsen/logrus v1.8.1

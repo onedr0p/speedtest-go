@@ -1,6 +1,7 @@
 package results
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 
@@ -23,11 +24,12 @@ type StatsData struct {
 var (
 	key   = []byte(securecookie.GenerateRandomKey(32))
 	store = sessions.NewCookieStore(key)
+	conf  = config.LoadedConfig()
 )
 
 func init() {
 	store.Options = &sessions.Options{
-		Path:     "/stats",
+		Path:     fmt.Sprintf("%s/stats", conf.BaseURL),
 		MaxAge:   3600 * 1, // 1 hour
 		HttpOnly: true,
 		SameSite: http.SameSiteStrictMode,
@@ -42,8 +44,6 @@ func Stats(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-
-	conf := config.LoadedConfig()
 
 	if conf.DatabaseType == "none" {
 		render.PlainText(w, r, "Statistics are disabled")
